@@ -4,7 +4,7 @@
 # Variables
 ###########################################
 
-APPLICATION_VERSION="3.0.14"
+APPLICATION_VERSION="3.0.14-beta0.1"
 DOCKER_PUSH=0
 
 ###########################################
@@ -67,6 +67,7 @@ print "Docker image built correctly"
 if [ $DOCKER_PUSH -eq 1 ]; then
 	print "Pushing docker image"
 	echo $DOCKER_PWD | docker login --username=theoriginaltonystark --password-stdin
+	[ $? -ne 0 ] && err "Credentials not valid" && exit 1
 	docker push theoriginaltonystark/mongo-rpi:latest
 	docker push theoriginaltonystark/mongo-rpi:${APPLICATION_VERSION}
 	print "Docker image pushed"

@@ -1,6 +1,8 @@
 FROM resin/rpi-raspbian:stretch
 
-LABEL created_by=https://github.com/andresvidal/rpi3-mongodb3
+# Original: https://github.com/andresvidal/rpi3-mongodb3
+
+LABEL created_by=https://github.com/mlsmrc/Docker-Mongo-RPi
 LABEL binaries=https://andyfelong.com/2017/08/mongodb-3-0-14-for-raspbian-stretch
 LABEL mongod_version=3.0.14
 
@@ -8,12 +10,14 @@ LABEL mongod_version=3.0.14
 ADD bin/mongodb_stretch_3_0_14_core.tar.gz /usr/bin/
 ADD bin/mongodb_stretch_3_0_14_tools.tar.gz /usr/bin/
 
+# Add mongodb user
 RUN groupadd -r mongodb && useradd -r -g mongodb mongodb
 
+# Copy files into the container
 COPY entrypoint.sh /data/entrypoint.sh
+COPY initDB.mongo  /data/initDB.mongo
 
-COPY entrypoint.sh /data
-
+# Create directory and assign ownership / adding entrypoint file
 RUN mkdir -p \
     /data/db \
     /data/configdb \
@@ -26,9 +30,6 @@ RUN mkdir -p \
     /var/log/mongodb \
     /docker-entrypoint-initdb.d/ \
 &&  chmod +x /data/entrypoint.sh
- 
-COPY users/* /docker-entrypoint-initdb.d/
-#COPY entrypoint.sh /data
 
 # Define mountable directories
 VOLUME /data/db /data/configdb
