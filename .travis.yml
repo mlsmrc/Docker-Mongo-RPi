@@ -1,7 +1,4 @@
 dist: bionic
 
-env:
-  - ARCH=arm
-
 script:
 - ./build.sh --push $DOCKER_PWD
