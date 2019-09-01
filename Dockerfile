@@ -16,6 +16,7 @@ RUN groupadd -r mongodb && useradd -r -g mongodb mongodb
 # Copy files into the container
 COPY entrypoint.sh /data/entrypoint.sh
 COPY initDB.mongo  /data/initDB.mongo
+COPY mongod.conf /etc/mongod.conf
 
 # Create directory and assign ownership / adding entrypoint file
 RUN mkdir -p \
@@ -36,8 +37,6 @@ VOLUME /data/db /data/configdb
 
 # Define working directory
 WORKDIR /data
-
-
 
 # Expose ports
 # - 27017: process

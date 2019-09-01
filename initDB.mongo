@@ -1,2 +1,2 @@
-use ##DB##
+use ##DB##;
 db.createUser({user:"##U##",pwd:"##P##",roles:[{role:"root",db:"##DB##"}]});

@@ -13,9 +13,9 @@ for f in /docker-entrypoint-initdb.d/*; do
 		done
 
 # Initialize the DB with INITDB parameters
-[ ! -z "$MONGO_INITDB_DATABASE"] && \
-[ ! -z "$MONGO_INITDB_ROOT_PASSWORD"] && \
-[ ! -z "$MONGO_INITDB_ROOT_USERNAME"] && cat initDB.mongo 	| sed "s/##DB##/$MONGO_INITDB_DATABASE/g" \
+[ ! -z "$MONGO_INITDB_DATABASE" ] && \
+[ ! -z "$MONGO_INITDB_ROOT_PASSWORD" ] && \
+[ ! -z "$MONGO_INITDB_ROOT_USERNAME" ] && cat initDB.mongo 	| sed "s/##DB##/$MONGO_INITDB_DATABASE/g" \
 		 						| sed "s/##P##/$MONGO_INITDB_ROOT_PASSWORD/g" \
 		 						| sed "s/##U##/$MONGO_INITDB_ROOT_USERNAME/g" | mongo
 
