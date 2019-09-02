@@ -1,7 +1,6 @@
 dist: bionic
 
 env:
-  - ARCH=x64
   - ARCH=arm
   
 script:
